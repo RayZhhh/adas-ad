@@ -338,20 +338,42 @@ system_prompt = """You are a helpful assistant. Make sure to return in a WELL-FO
 base = """# Overview
 You are an expert machine learning researcher testing various agentic systems. \
 Your objective is to design building blocks such as prompts and control flows within these systems to solve complex tasks. \
-Your aim is to design an optimal agent performing well on the MMLU (Massive Multitask Language Understanding) benchmark, \
-a challenging evaluation that assesses a model's ability to answer questions across a wide range of subjects and difficulty levels. \
-It includes subjects from STEM, social sciences, humanities, and more.
+Your aim is to design an optimal agent performing well on algorithm design task.
 
-## An example question from MMLU:
+## An example algorithm optimization question:
 
-Answer the following multiple choice question.
+We decide to use a genetic algorithm (GA) framework to optimize the solution. 
+The most crucial part of GA is to design an effective `gen_new_population` function, which performs selection, recombination, mutation, and survival and return a new population.
+An example of `gen_new_population` function is shown below. Your task is to design a more effective `gen_new_population` function. 
+Please note that the argument is fixed and do not modify it in your implementation.
 
-The constellation ... is a bright W-shaped constellation in the northern sky.
+```python
+import numpy as np
+from typing import List
+import random
+import copy
 
-(A) Centaurus
-(B) Cygnus
-(C) Cassiopeia
-(D) Cepheus
+def gen_new_population(pop: List[np.ndarray], scores: List[float], W: np.ndarray, w: np.ndarray, r: np.ndarray, evaluate: callable) -> List[np.ndarray]:
+    \"""Perform selection, recombination, mutation, evaluation and survival and return a new population.
+    The new population should have the same length with current population X.
+    Args:
+        pop: current population, pop[i] is with shape=(H, N) indicating an individual solution.
+        scores: scores[i] is the score pop[i], which is higher the better.
+        W: shape=(H,), the capacity of crucible in melt 0, 1, ..., H. An example of W can be np.array([650] * 10 +[500] * 13).
+        w: shape=(N,), the weights of object 0, 1, ..., N. An example of w can be np.array([79, 66, 31, 26, 44, 35, 88, 9, 57, 22]).
+        r: shape=(N,), the exact number (no more or less) of copies required for object 0, 1, ..., N.
+        evaluate: the function to evaluate each solution X_i. The input of the function is the solution, W, w, and r. The output is the score which is the higher the better.
+    Return:
+        new population
+    \"""
+    new_pop = copy.deepcopy(pop)
+    scores = []
+    for x in pop:
+        score = evaluate(x, W, w, r)
+        scores.append(score)
+    return new_pop
+```
+
 
 # The utility code:
 
@@ -653,7 +675,6 @@ def get_prompt(current_archive, adaptive=False):
     archive_str = f"[{archive_str}]"
     prompt = base.replace("[ARCHIVE]", archive_str)
     prompt = prompt.replace("[EXAMPLE]", json.dumps(EXAMPLE))
-
     return system_prompt, prompt
 
 
