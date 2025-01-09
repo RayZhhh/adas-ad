@@ -1,0 +1,31 @@
+{
+  "os":  "macOS-10.16-x86_64-i386-64bit",
+  "python":  "CPython 3.11.11",
+  "startedAt":  "2025-01-08T06:10:56.946062Z",
+  "program":  "/Users/zhangrui/Desktop/ADAS/_cast_schedule/search.py",
+  "codePath":  "Desktop/ADAS/_cast_schedule/search.py",
+  "email":  "rui.zhang.cs@cityu.edu.hk",
+  "root":  "/Users/zhangrui/Desktop/ADAS/_cast_schedule",
+  "host":  "zhangruideMacBook-Pro.local",
+  "executable":  "/opt/anaconda3/envs/adas/bin/python",
+  "codePathLocal":  "search.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "1000240963584",
+      "used":  "818457112576"
+    },
+    "/System/Volumes/Data":  {
+      "total":  "1000240963584",
+      "used":  "818457112576"
+    }
+  },
+  "memory":  {
+    "total":  "34359738368"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  }
+}
